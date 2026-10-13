@@ -1,0 +1,3 @@
+.DS_Store
+# REQUEST_URL を置き換えたマニフェスト (デプロイ先の関数 URL が入る)
+slack-app-manifest.generated.yaml

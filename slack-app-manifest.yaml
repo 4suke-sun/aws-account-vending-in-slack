@@ -1,0 +1,44 @@
+# Slack アプリのマニフェスト
+# https://api.slack.com/apps → Create New App → From a manifest に貼り付ける。
+# REQUEST_URL は cdk deploy の出力 SlackRequestUrl に置き換える (末尾の / はそのままでよい)
+# 置き換え済みのファイルは次のコマンドで作れる (slack-app-manifest.generated.yaml、git 管理外)
+#   URL=$(aws cloudformation describe-stacks --region ap-northeast-1 --stack-name AwsAccountVendingSlack \
+#     --query "Stacks[0].Outputs[?OutputKey=='SlackRequestUrl'].OutputValue" --output text)
+#   grep -v '^#' slack-app-manifest.yaml | sed "s#REQUEST_URL#$URL#g" > slack-app-manifest.generated.yaml
+display_information:
+  name: AWS Account Vending
+  description: Slack から AWS アカウントの払い出しを申請・承認する
+  background_color: "#232f3e"
+features:
+  app_home:
+    home_tab_enabled: false
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false
+  bot_user:
+    display_name: aws-account-bot
+    always_online: true
+  shortcuts:
+    - name: AWSアカウントを申請
+      type: global
+      callback_id: request_aws_account
+      description: 新しい AWS アカウントの払い出しを申請します
+  slash_commands:
+    - command: /aws-account
+      url: REQUEST_URL
+      description: AWS アカウントの払い出しを申請
+      should_escape: false
+oauth_config:
+  scopes:
+    bot:
+      - commands
+      - chat:write
+      # 申請者の名前とメールアドレス (Identity Center のユーザーと照合する)
+      - users:read
+      - users:read.email
+settings:
+  interactivity:
+    is_enabled: true
+    request_url: REQUEST_URL
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
