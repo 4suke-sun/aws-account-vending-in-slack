@@ -68,7 +68,13 @@ npx cdk deploy
 
 `slack-app-manifest.yaml` の `REQUEST_URL` を `SlackRequestUrl` に置き換えます。ファイル冒頭のコメントにあるコマンドで、置き換え済みの `slack-app-manifest.generated.yaml` を作れます。
 
-https://api.slack.com/apps の「Create New App」→「From a manifest」に貼り付け、「Create and Install」でワークスペースにインストールします。
+https://api.slack.com/apps の「Create New App」→「From a manifest」でワークスペースを選び、マニフェストを貼り付けて「Next」を押します。
+
+<img src="docs/slack-create-manifest.png" alt="マニフェストを貼り付ける画面" width="480">
+
+確認画面でスコープが4つ (`commands`・`chat:write`・`users:read`・`users:read.email`) あることを確かめ、「Create and Install」でワークスペースにインストールします。
+
+<img src="docs/slack-create-install.png" alt="Review your app の画面" width="480">
 
 ### 3. Slack の設定を SSM パラメータストアに入れる
 
