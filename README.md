@@ -13,7 +13,11 @@ Slack から AWS アカウントの払い出しを申請し、情シスのチャ
 - Control Tower は使いません。Organizations の API だけで作ります
 - 登壇資料: [1人アドミンな私は AWSアカウント申請をSlackで完結したい！](https://speakerdeck.com/ysuzuki/1-hito-ado-minna-watashi-ha-aws-akaunto-shinsei-o-slack-de-kanketsu-shitai)
 
-## 流れ
+## アーキテクチャ
+
+![アーキテクチャ図](docs/architecture.png)
+
+処理の流れは次のとおりです。
 
 ```
 [申請] /aws-account・グローバルショートカット → モーダル
